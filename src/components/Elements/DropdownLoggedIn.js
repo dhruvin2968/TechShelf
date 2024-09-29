@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { useEffect } from "react";
+//import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //import { toast } from "react-toastify";
-import { getUser, logout } from "../../services";
-
+import {  logout } from "../../services";
+//getUser
 export const DropdownLoggedIn = ({setDropdown}) => {
     const navigate = useNavigate();
+    // eslint-disable-next-line
     const [user, setUser] = useState({});
 
     // useEffect(() => {

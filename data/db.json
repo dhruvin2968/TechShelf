@@ -239,5 +239,17 @@
   ],
   "orders": [],
   "users": [
+    {
+      "email": "dhruvin.mehta2023@vitstudent.ac.in",
+      "password": "$2a$10$KCxJOyz8joy.VVqHYQTwiO9PLymbpkYTOZ9PflBfBQiK4H7tfAp8O",
+      "name": "dhruvin4321",
+      "id": 1
+    },
+    {
+      "email": "myname@gmail.com",
+      "password": "$2a$10$Wmu9za/PVAHJnjFES7ZP9ehcDGwfLZH7BiIrKXJVhplMr1kT0IeUS",
+      "name": "dhruvin",
+      "id": 2
+    }
   ]
 }

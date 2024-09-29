@@ -22,23 +22,13 @@ export const Register = () => {
     body: JSON.stringify(authDetail)
   };
 
-  try {
+ 
     const response = await fetch("http://localhost:8000/register", requestOptions); // Changed endpoint to /register
-    
-    // Check if the response is OK (status code 200-299)
-    if (!response.ok) {
-      const errorText = await response.text();  // Parse error text if response is not JSON
-      throw new Error(`Error ${response.status}: ${errorText}`);
-    }
-
     const data = await response.json();  // Only parse JSON if the response is OK
     
     console.log(data);  // Handle the successful response here (e.g., show success message, navigate)
 
-  } catch (error) {
-    console.error("Registration failed:", error.message);  // Catch and log errors
-    alert(`Registration failed: ${error.message}`);  // Provide user feedback (can use toast instead of alert)
-  }
+
 }
 
   return (
