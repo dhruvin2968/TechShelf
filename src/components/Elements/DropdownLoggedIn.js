@@ -1,13 +1,12 @@
-import { useState } from "react";
-//import { useEffect } from "react";
+// import { useState } from "react";
+// import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import { toast } from "react-toastify";
-import {  logout } from "../../services";
-//getUser
+// import { toast } from "react-toastify";
+// import { getUser } from "../../services";
+
 export const DropdownLoggedIn = ({setDropdown}) => {
-    const navigate = useNavigate();
-    // eslint-disable-next-line
-    const [user, setUser] = useState({});
+   
+    //const [user, setUser] = useState({});
 
     // useEffect(() => {
     //     async function fetchData(){
@@ -21,16 +20,18 @@ export const DropdownLoggedIn = ({setDropdown}) => {
     //     fetchData();
     // }, []); //eslint-disable-line
 
+    const navigate = useNavigate();
     function handleLogout(){
-        logout();
-        setDropdown(false);
-        navigate("/");
-    }
+        sessionStorage.removeItem("token");
+        sessionStorage.removeItem("techshelfid");
+                setDropdown(false);
+                navigate("/");
+            }
 
   return (
     <div id="dropdownAvatar" className="select-none	absolute top-10 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
         <div className="py-3 px-4 text-sm text-gray-900 dark:text-white">
-            <div className="font-medium truncate">{user.email}</div>
+            <div className="font-medium truncate">dhruvin@hello.com</div>
         </div>
         <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserAvatarButton">
             <li>
@@ -46,3 +47,4 @@ export const DropdownLoggedIn = ({setDropdown}) => {
     </div>
   )
 }
+

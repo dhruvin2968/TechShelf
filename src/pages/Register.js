@@ -1,11 +1,11 @@
-//import { useNavigate } from 'react-router-dom';
-//import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useTitle } from "../hooks/useTitle";
 //import { register } from '../services';
 
 export const Register = () => {
   useTitle("Register");
- // const navigate = useNavigate();
+ const navigate = useNavigate();
 
  async function handleRegister(event) {
   event.preventDefault();
@@ -25,10 +25,18 @@ export const Register = () => {
  
     const response = await fetch("http://localhost:8000/register", requestOptions); // Changed endpoint to /register
     const data = await response.json();  // Only parse JSON if the response is OK
+    //data.accessToken? navigate("/products"): toast.error(data);
     
-    console.log(data);  // Handle the successful response here (e.g., show success message, navigate)
-
-
+    if (data.accessToken) {
+      toast.success("Registration successful!");
+      navigate("/products");
+      //now we stroe token and id in sessionStorage..which is available in data
+      sessionStorage.setItem("token",JSON.stringify(data.accessToken));
+      sessionStorage.setItem("techshelfid",JSON.stringify(data.user.id));
+      console.log(data);
+    } else {
+      toast.error(data);
+    }
 }
 
   return (
