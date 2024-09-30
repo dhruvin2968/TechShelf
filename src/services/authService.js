@@ -12,7 +12,7 @@ export async function login(authDetail){
 
     if(data.accessToken){
         sessionStorage.setItem("token", JSON.stringify(data.accessToken));
-        sessionStorage.setItem("cbid", JSON.stringify(data.user.id));
+        sessionStorage.setItem("techshelfid", JSON.stringify(data.user.id));
     }
 
     return data;
@@ -32,7 +32,7 @@ export async function register(authDetail){
     
     if(data.accessToken){
         sessionStorage.setItem("token", JSON.stringify(data.accessToken));
-        sessionStorage.setItem("cbid", JSON.stringify(data.user.id));
+        sessionStorage.setItem("techshelfid", JSON.stringify(data.user.id));
     }
 
     return data;
@@ -40,5 +40,5 @@ export async function register(authDetail){
 
 export function logout(){
     sessionStorage.removeItem("token");
-    sessionStorage.removeItem("cbid");
+    sessionStorage.removeItem("techshelfid");
 }

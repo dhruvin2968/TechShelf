@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import img from './img.png';
 //import { toast } from "react-toastify";
 import { useCart } from "../../../context";
 //import { createOrder} from "../../../services";
@@ -44,18 +46,19 @@ export const Checkout = ({ setCheckout }) => {
         event.preventDefault();
 
 
-        const order = {
-            cartList: cartList,
-            amount_paid: total,
-            quantity: cartList.length,
-            user: {
-                //event.target.name.value,//if user is typing this
-                name: user.name,
-                email: user.email,//if we are passing information (from our useState)
-                id: user.id
-            }
-        }
+       
         try {
+            const order = {
+                cartList: cartList,
+                amount_paid: total,
+                quantity: cartList.length,
+                user: {
+                    //event.target.name.value,//if user is typing this
+                    name: user.name,
+                    email: user.email,//if we are passing information (from our useState)
+                    id: user.id
+                }
+            }
             const requestOptions = {
                 method: "POST",  //we re sending info
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
@@ -69,6 +72,12 @@ export const Checkout = ({ setCheckout }) => {
             //i.e. status 201 created or order created
             clearCart();
             navigate("/order-summary", { state: { data: data, status: true } });
+            Swal.fire({
+                title: 'Order placed successfully!',
+                text: 'Thank you for using TechShelf!',
+                icon: 'success',
+                confirmButtonText: 'Cool'
+              })
         }
         catch(error)
         {
@@ -100,23 +109,44 @@ export const Checkout = ({ setCheckout }) => {
                                 </div>
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email:</label>
-                                    <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={user.email || "backup@example.com"} disabled required="" />
+                                    <input type="text" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value={user.email || "backup@example.com"}disabled required="" />
                                 </div>
                                 <div>
                                     <label htmlFor="card" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Card Number:</label>
-                                    <input type="number" name="card" id="card" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="4215625462597845" disabled required="" />
+                                    <input type="number" name="card" id="card" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="4215625462597845"  required="" />
                                 </div>
+                              
                                 <div className="">
-                                    <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Expiry Date:</label>
-                                    <input type="number" name="month" id="month" className="inline-block w-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="03" disabled required="" />
-                                    <input type="number" name="year" id="year" className="inline-block w-20 ml-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="27" disabled required="" />
+                                <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Expiry Date:
+                                </label>
+                                <div className="flex items-center space-x-3">
+                                    <input
+                                    type="number"
+                                    name="month"
+                                    id="month"
+                                    className="w-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+                                    value="03"
+                                    required
+                                    />
+                                    <input
+                                    type="number"
+                                    name="year"
+                                    id="year"
+                                    className="w-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:text-white"
+                                    value="27"
+                                    required
+                                    />
+                                    <img src={img} alt="Expiry Date" className="w-28 h-auto pl-6" />
                                 </div>
+                                </div>
+
                                 <div>
-                                    <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >Security Code:</label>
-                                    <input type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="523" disabled required="" />
+                                    <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >CVV:</label>
+                                    <input type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="523" required="" />
                                 </div>
                                 <p className="mb-4 text-2xl font-semibold text-lime-500 text-center">
-                                    ${total}
+                                ₹   {total}
                                 </p>
                                 <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700" >
                                     <i className="mr-2 bi bi-lock-fill"></i>PAY NOW

@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTitle } from "../hooks/useTitle";
@@ -28,7 +29,11 @@ export const Register = () => {
     //data.accessToken? navigate("/products"): toast.error(data);
     
     if (data.accessToken) {
-      toast.success("Registration successful!");
+      Swal.fire({
+        title: "Resgistration Successful!",
+        text: "Welcome to TechShelf!",
+        icon: "success"
+      });
       navigate("/products");
       //now we stroe token and id in sessionStorage..which is available in data
       sessionStorage.setItem("token",JSON.stringify(data.accessToken));

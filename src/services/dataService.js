@@ -1,22 +1,22 @@
 function getSession(){
     const token = JSON.parse(sessionStorage.getItem("token"));
-    const cbid = JSON.parse(sessionStorage.getItem("cbid"));
-    return {token, cbid};
+    const techshelfid = JSON.parse(sessionStorage.getItem("techshelfid"));
+    return {token, techshelfid};
 }
 
-// export async function getUser(){
-//     const browserData = getSession();
-//     const requestOptions = {
-//         method: "GET",
-//         headers: {"Content-Type": "application/json", Authorization: `Bearer ${browserData.token}`}
-//     }
-//     const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${browserData.cbid}`, requestOptions);
-//     if(!response.ok){
-//         throw { message: response.statusText, status: response.status }; //eslint-disable-line
-//     }
-//     const data = await response.json();
-//     return data;
-// }
+export async function getUser(){
+    const browserData = getSession();
+    const requestOptions = {
+        method: "GET",
+        headers: {"Content-Type": "application/json", Authorization: `Bearer ${browserData.token}`}
+    }
+    const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${browserData.techshelfid}`, requestOptions);
+    if(!response.ok){
+        throw { message: response.statusText, status: response.status }; //eslint-disable-line
+    }
+    const data = await response.json();
+    return data;
+}
 
 export async function getUserOrders(){
     const browserData = getSession();
@@ -24,7 +24,7 @@ export async function getUserOrders(){
         method: "GET",
         headers: {"Content-Type": "application/json", Authorization: `Bearer ${browserData.token}`}
     }
-    const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders?user.id=${browserData.cbid}`, requestOptions);
+    const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders?user.id=${browserData.techshelfid}`, requestOptions);
     if(!response.ok){
         throw { message: response.statusText, status: response.status }; //eslint-disable-line
     }
