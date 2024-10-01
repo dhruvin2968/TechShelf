@@ -1,0 +1,30 @@
+export async function getProductList(searchTerm){
+    const response = await fetch('http://localhost:8000/444/products');
+    if(!response.ok){
+        throw { message: response.statusText, status: response.status }; //eslint-disable-line
+    }
+   const data = await response.json();
+   const filteredProducts = data.filter(product => 
+    product.name.toLowerCase().includes(`${searchTerm?searchTerm:''}`)
+  );
+    return filteredProducts;
+}
+
+export async function getProduct(id){
+    const response = await fetch(`http://localhost:8000/444/products/${id}`);
+    if(!response.ok){
+        throw { message: response.statusText, status: response.status }; //eslint-disable-line
+    }
+    const data = await response.json()
+    return data;
+}
+
+
+export async function getFeaturedList(){
+    const response = await fetch(`http://localhost:8000/444/featured_products`);
+    if(!response.ok){
+        throw { message: response.statusText, status: response.status }; //eslint-disable-line
+    }
+    const data = await response.json()
+    return data;
+}
