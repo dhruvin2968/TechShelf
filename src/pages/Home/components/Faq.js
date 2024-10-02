@@ -25,9 +25,9 @@ export const Faq = () => {
     ];
     
   return (
-    <section className="my-10 p-7 border rounded dark:border-green-700 shadow-sm">        
-      <h1 className="text-2xl text-center font-semibold text-black dark:text-white mb-3 underline underline-offset-8">Question in mind?</h1>    
-            <div className="" id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-green-900 text-green-900 dark:text-green-900" data-inactive-classes="text-green-500 dark:text-green-400">
+    <section className="my-10 p-7 border rounded dark:border-violet-500 shadow-sm">        
+      <h1 className="text-2xl text-center font-semibold text-violet-950 dark:text-white mb-3 underline underline-offset-8">Question in mind?</h1>    
+            <div className="" id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white dark:bg-violet-900 text-violet-900 dark:text-violet-900" data-inactive-classes="text-violet-500 dark:text-violet-400">
               { faqs.map((faq) => (//individual faq component accessed 
                 <Accordion key={faq.id} faq={faq} />   //passing 2 attributes in accordian key and faq
                                                         //key has the id , faq is faq itself

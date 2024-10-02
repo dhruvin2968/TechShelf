@@ -28,7 +28,7 @@ export const DashboardPage = () => {
   return (
     <main>
       <section>
-        <p className="text-2xl text-center font-semibold dark:text-green-100 my-10 underline underline-offset-8">My Dashboard</p>
+        <p className="text-2xl text-center font-semibold dark:text-violet-100 my-10 underline underline-offset-8">My Dashboard</p>
       </section>
 
       <section>

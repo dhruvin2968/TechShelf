@@ -41,14 +41,14 @@ export const ProductDetail = () => {
   return (
     <main>
       <section>
-        <h1 className="mt-10 mb-5 text-4xl text-center font-bold text-green-900 dark:text-gray-200">{product.name}</h1>
-        <p className="mb-5 text-lg text-center text-green-900 dark:text-gray-100">{product.overview}</p>
+        <h1 className="mt-10 mb-5 text-4xl text-center font-bold text-violet-900 dark:text-white">{product.name}</h1>
+        <p className="mb-5 text-lg text-center text-violet-900 dark:text-white">{product.overview}</p>
         <div className="flex flex-wrap justify-around">
           <div className="max-w-xl my-3">
             <img className="rounded" src={product.poster} alt={product.name} />
           </div>
           <div className="max-w-xl my-3">
-            <p className="text-3xl font-bold text-green-900 dark:text-gray-100">
+            <p className="text-3xl font-bold text-violet-900 dark:text-white">
               <span className="mr-1">$</span>
               <span className="">{product.price}</span>
             </p>
@@ -59,15 +59,15 @@ export const ProductDetail = () => {
             </p>
             <p className="my-4 select-none">
               {product.best_seller && <span className="font-semibold text-amber-500 border bg-amber-50 rounded-lg px-3 py-1 mr-2">BEST SELLER</span>}
-              {product.in_stock && <span className="font-semibold text-emerald-600	border bg-green-100 rounded-lg px-3 py-1 mr-2">INSTOCK</span>}
-              {!product.in_stock && <span className="font-semibold text-rose-700 border bg-green-100 rounded-lg px-3 py-1 mr-2">OUT OF STOCK</span>}
-              <span className="font-semibold text-green-500 border bg-green-100 rounded-lg px-3 py-1 mr-2">{product.size} MB</span>
+              {product.in_stock && <span className="font-semibold text-emerald-600	border bg-violet-100 rounded-lg px-3 py-1 mr-2">INSTOCK</span>}
+              {!product.in_stock && <span className="font-semibold text-rose-700 border bg-violet-100 rounded-lg px-3 py-1 mr-2">OUT OF STOCK</span>}
+              <span className="font-semibold text-violet-500 border bg-violet-100 rounded-lg px-3 py-1 mr-2">{product.size} MB</span>
             </p>
             <p className="my-3">
-              {!inCart && <button onClick={() => addToCart(product)} className={`inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-green-900 rounded-lg hover:bg-green-950 ${product.in_stock ? "" : "cursor-not-allowed"}`} disabled={product.in_stock ? "" : "disabled"}>Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>}
+              {!inCart && <button onClick={() => addToCart(product)} className={`inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-violet-900 rounded-lg hover:bg-violet-950 ${product.in_stock ? "" : "cursor-not-allowed"}`} disabled={product.in_stock ? "" : "disabled"}>Add To Cart <i className="ml-1 bi bi-plus-lg"></i></button>}
               {inCart && <button onClick={() => removeFromCart(product)} className={`inline-flex items-center py-2 px-5 text-lg font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-800 ${product.in_stock ? "" : "cursor-not-allowed"}`} disabled={product.in_stock ? "" : "disabled"}>Remove Item <i className="ml-1 bi bi-trash3"></i></button>}
             </p>
-            <p className="text-lg text-green-900 dark:text-gray-200">
+            <p className="text-lg text-violet-900 dark:text-white">
               {product.long_description}
             </p>
           </div>
