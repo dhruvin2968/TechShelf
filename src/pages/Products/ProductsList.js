@@ -4,9 +4,8 @@ import { useTitle } from "../../hooks/useTitle";
  import { ProductCard } from "../../components";
 import { FilterBar } from "./components/FilterBar";
 import { useFilter } from "../../context";
- 
-// import { getProductList } from "../../services";
-// import { toast } from "react-toastify";
+import { getProductList } from "../../services/productService";
+ import { toast } from "react-toastify";
 
 
 
@@ -18,19 +17,15 @@ export const ProductsList = () => {
   
   const [show, setShow] = useState(false);
   const search = useLocation().search;
-  const searchTerm = new URLSearchParams(search).get("q");
-  //const { state, dispatch } = useFilter();  
+  const searchTerm = new URLSearchParams(search).get("q");  
 
 useEffect(() => {
   async function fetchProducts(){
-    const response = await fetch('http://localhost:8000/products');
-   const data = await response.json();
-    const filteredProducts = data.filter(product => 
-      product.name.toLowerCase().includes(`${searchTerm?searchTerm:''}`)
-    );
-    console.log(filteredProducts);
-    
+   try{const filteredProducts=await getProductList(searchTerm); 
     initialProductList(filteredProducts);
+  } catch(error){
+    toast.error(error.message, {closeButton: true, position: "bottom-center" });
+  }   
   }
   fetchProducts();
 },[searchTerm]); //eslint-disable-line

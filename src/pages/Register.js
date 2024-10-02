@@ -2,6 +2,7 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTitle } from "../hooks/useTitle";
+import { register } from '../services/authService';
 //import { register } from '../services';
 
 export const Register = () => {
@@ -17,16 +18,9 @@ export const Register = () => {
     password: event.target.password.value
   };
 
-  const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" }, // Corrected header casing
-    body: JSON.stringify(authDetail)
-  };
-
  
-    const response = await fetch("http://localhost:8000/register", requestOptions); // Changed endpoint to /register
-    const data = await response.json();  // Only parse JSON if the response is OK
-    //data.accessToken? navigate("/products"): toast.error(data);
+    const data = await register(authDetail);  // Only parse JSON if the response is OK
+    
     
     if (data.accessToken) {
       Swal.fire({
@@ -35,10 +29,6 @@ export const Register = () => {
         icon: "success"
       });
       navigate("/products");
-      //now we stroe token and id in sessionStorage..which is available in data
-      sessionStorage.setItem("token",JSON.stringify(data.accessToken));
-      sessionStorage.setItem("techshelfid",JSON.stringify(data.user.id));
-      console.log(data);
     } else {
       toast.error(data);
     }

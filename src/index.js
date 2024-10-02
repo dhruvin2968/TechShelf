@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <FilterProvider>
-        <ToastContainer closeButton={false} autoClose={2000} position={"top-right"}/>
+        <ToastContainer closeButton={false} autoClose={2000} position={"top-right"} closeOnClick={true} />
         <ScrollToTop />
         <CartProvider>
         <App />

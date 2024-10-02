@@ -1,46 +1,32 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//  import { toast } from "react-toastify";
-// import { getUser } from "../../services";
+ import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { logout } from "../../services";
+import { getUser } from "../../services";
 export const DropdownLoggedIn = ({setDropdown}) => {
    
    const [user, setUser] = useState({});
 
-    // useEffect(() => {
-    //     async function fetchData(){
-    //         try{
-    //             const data = await getUser();
-    //             data.email ? setUser(data) : handleLogout();
-    //         } catch(error){
-    //             toast.error(error.message, { closeButton: true, position: "bottom-center" });
-    //         }            
-    //     }
-    //     fetchData();
-    // }, []); //eslint-disable-line
-    const token = JSON.parse(sessionStorage.getItem("token"));
-  const techshelfid = JSON.parse(sessionStorage.getItem("techshelfid"));
-    useEffect(() => {   
-     async function getUser(){
-        
-        const requestOptions = {
-            method: "GET",
-            headers: {"Content-Type": "application/json", Authorization: `Bearer ${token}`}
+    useEffect(() => {
+        async function fetchData(){
+            try{
+                const data = await getUser();
+                data.email ? setUser(data) : handleLogout();
+            } catch(error){
+                toast.error(error.message, { closeButton: true, position: "bottom-center" });
+            }            
         }
-        const response = await fetch(`http://localhost:8000/600/users/${techshelfid}`, requestOptions);
-        
-        const data = await response.json();
-        setUser(data);
-     }
-     getUser();
-    }, []);//eslint-disable-line
+        fetchData();
+    }, []); //eslint-disable-line
+    
+   
 
 
     const navigate = useNavigate();
     function handleLogout(){
-        sessionStorage.removeItem("token");
-        sessionStorage.removeItem("techshelfid");
+                logout();
                 setDropdown(false);
                 navigate("/");
                 Swal.fire({

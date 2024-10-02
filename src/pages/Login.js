@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useTitle } from "../hooks/useTitle";
+import { login } from "../services/authService";
 //import { login } from "../services";
 
 
@@ -20,46 +21,16 @@ export const Login = () => {
         email: email.current.value,
         password: password.current.value
       }
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" }, // Corrected header casing
-        body: JSON.stringify(authDetail)
-      };
-     const response = await fetch("http://localhost:8000/login",requestOptions);
-    const data=await response.json();
-    console.log(data);
-    
+    const data=await login(authDetail);
     if (data.accessToken) {
       toast.success("Welcome back to TechShelf!");
       navigate("/products");
       console.log(data);
-      //now we stroe token and id in sessionStorage..which is available in data
-      sessionStorage.setItem("token",JSON.stringify(data.accessToken));
-      sessionStorage.setItem("techshelfid",JSON.stringify(data.user.id));
 
     } else {
       toast.error(data);
     }
-
-
-  // useTitle("Login");
-  // const navigate = useNavigate();
-  // const email = useRef(); //for reference used down
-  // const password = useRef();
-
-  // async function handleLogin(event){
-  //   event.preventDefault();
-  //   try{
-  //     const authDetail = { //we need to send this to our fetch request
-  //       email: email.current.value,
-  //       password: password.current.value
-  //     }
-  //    const data = await login(authDetail);
-  //    data.accessToken ? navigate("/products") : toast.error(data);
-  //   } catch(error){
-  //     toast.error(error.message, {closeButton: true, position: "bottom-center"});
-  //   }
-  // }
+  }
   
   // async function handleLoginGuest(){
   //   email.current.value = process.env.REACT_APP_GUEST_LOGIN;
@@ -74,7 +45,7 @@ export const Login = () => {
   //   } catch(error){
   //      toast.error(error.message, {closeButton: true, position: "bottom-center"});
   //   }
-  }
+  
 
   return (
     <main>

@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import img from './img.png';
-//import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useCart } from "../../../context";
-//import { createOrder} from "../../../services";
+import { getUser } from "../../../services";
+import { createOrder } from "../../../services";
 //checkout is the pop up type small page that appears when u click on place order
 export const Checkout = ({ setCheckout }) => {
     const { cartList, total, clearCart } = useCart();
@@ -12,35 +13,22 @@ export const Checkout = ({ setCheckout }) => {
 
     const navigate = useNavigate();
 
-    //   useEffect(() => {
-    //     async function fetchData(){
-    //         try{
-    //             const data = await getUser();
-    //             setUser(data);
-    //         } catch(error){
-    //             toast.error(error.message, { closeButton: true, position: "bottom-center" });
-    //         }        
-    //     }
-    //     fetchData();
-    //   }, []);
-
-    const token = JSON.parse(sessionStorage.getItem("token"));
-    const techshelfid = JSON.parse(sessionStorage.getItem("techshelfid"));
-    useEffect(() => {
-
-        async function getUser() {
-
-
-            const response = await fetch(`http://localhost:8000/600/users/${techshelfid}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
-            });
-            const data = await response.json();
-            setUser(data);
-            console.log(data);
+      useEffect(() => {
+        async function fetchData(){
+            try{
+                const data = await getUser();
+                setUser(data);
+            } catch(error){
+                toast.error(error.message, { closeButton: true, position: "bottom-center" });
+            }        
         }
-        getUser();// eslint-disable-next-line
-    }, []);
+        fetchData();
+      }, []);
+
+    
+
+
+       
 
     async function handleOrderSubmit(event) { //async bcoz this is gi=oing to handle cetain request
         event.preventDefault();
@@ -48,27 +36,8 @@ export const Checkout = ({ setCheckout }) => {
 
        
         try {
-            const order = {
-                cartList: cartList,
-                amount_paid: total,
-                quantity: cartList.length,
-                user: {
-                    //event.target.name.value,//if user is typing this
-                    name: user.name,
-                    email: user.email,//if we are passing information (from our useState)
-                    id: user.id
-                }
-            }
-            const requestOptions = {
-                method: "POST",  //we re sending info
-                headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-                body: JSON.stringify(order) //entire orderlist is to be stored for each user 
-                //for keeping a history about it
-            }
-            //response defined but not not used
-            // eslint-disable-next-line 
-            const response = await fetch(`http://localhost:8000/660/orders`, requestOptions);
-            const data = await response.json();//got data means order is successful 
+            
+            const data = await createOrder(cartList, total, user);//got data means order is successful 
             //i.e. status 201 created or order created
             clearCart();
             navigate("/order-summary", { state: { data: data, status: true } });
@@ -113,7 +82,7 @@ export const Checkout = ({ setCheckout }) => {
                                 </div>
                                 <div>
                                     <label htmlFor="card" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Card Number:</label>
-                                    <input type="number" name="card" id="card" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="4215625462597845"  required="" />
+                                    <input type="number" name="card" id="card" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="4215625462597845"  disabled required="" />
                                 </div>
                               
                                 <div className="">
@@ -122,6 +91,7 @@ export const Checkout = ({ setCheckout }) => {
                                 </label>
                                 <div className="flex items-center space-x-3">
                                     <input
+                                    disabled
                                     type="number"
                                     name="month"
                                     id="month"
@@ -130,6 +100,7 @@ export const Checkout = ({ setCheckout }) => {
                                     required
                                     />
                                     <input
+                                    disabled
                                     type="number"
                                     name="year"
                                     id="year"
@@ -143,7 +114,7 @@ export const Checkout = ({ setCheckout }) => {
 
                                 <div>
                                     <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" >CVV:</label>
-                                    <input type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="523" required="" />
+                                    <input disabled  type="number" name="code" id="code" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:value-gray-400 dark:text-white" value="523" required="" />
                                 </div>
                                 <p className="mb-4 text-2xl font-semibold text-lime-500 text-center">
                                 ₹   {total}
