@@ -1,7 +1,7 @@
-export async function login(authDetail){
+export async function login(authDetail) {
     const requestOptions = {
         method: "POST",
-        headers: {"content-Type": "application/json"},
+        headers: { "content-Type": "application/json" },
         body: JSON.stringify(authDetail)
     }
     const response = await fetch(`http://localhost:8000/login`, requestOptions);
@@ -10,7 +10,7 @@ export async function login(authDetail){
     }
     const data = await response.json();
 
-    if(data.accessToken){
+    if (data.accessToken) {
         sessionStorage.setItem("token", JSON.stringify(data.accessToken));
         sessionStorage.setItem("techshelfid", JSON.stringify(data.user.id));
     }
@@ -18,10 +18,10 @@ export async function login(authDetail){
     return data;
 }
 
-export async function register(authDetail){
+export async function register(authDetail) {
     const requestOptions = {
         method: "POST",
-        headers: {"content-Type": "application/json"},
+        headers: { "content-Type": "application/json" },
         body: JSON.stringify(authDetail)
     }  
     const response = await fetch(`http://localhost:8000/register`, requestOptions);
@@ -29,8 +29,8 @@ export async function register(authDetail){
         throw { message: response.statusText, status: response.status }; //eslint-disable-line
     }
     const data = await response.json();
-    
-    if(data.accessToken){
+
+    if (data.accessToken) {
         sessionStorage.setItem("token", JSON.stringify(data.accessToken));
         sessionStorage.setItem("techshelfid", JSON.stringify(data.user.id));
     }
@@ -38,7 +38,7 @@ export async function register(authDetail){
     return data;
 }
 
-export function logout(){
+export function logout() {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("techshelfid");
 }

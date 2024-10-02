@@ -1,7 +1,6 @@
 import { useState,useEffect } from "react";
 import { toast } from "react-toastify";
 import { useTitle } from "../../hooks/useTitle";
-
 import { DashboardCard } from "./components/DashboardCard";
 import { DashboardEmpty } from "./components/DashboardEmpty";
 import { getUserOrders } from "../../services";
@@ -9,18 +8,18 @@ import { getUserOrders } from "../../services";
 export const DashboardPage = () => {
   const [orders, setOrders] = useState([]);
   useTitle("Dashboard");
- 
+
   useEffect(() => {
 
     async function fetchOrders(){// eslint-disable-next-line
         try
-       { const data=await getUserOrders();
+        {const data=await getUserOrders();
         setOrders(data);
-       }catch(error)
-       {
-        toast.error(error.message, { closeButton: true, position: "bottom-center"});
-           
-       }
+      }
+      catch(error)
+      {
+        toast.error(error.message,{position:"bottom-center", closeOnClick:true, autoClose:5000});
+      }
             
     }
     fetchOrders();// eslint-disable-next-line
@@ -29,7 +28,7 @@ export const DashboardPage = () => {
   return (
     <main>
       <section>
-        <p className="text-2xl text-center font-semibold dark:text-slate-100 my-10 underline underline-offset-8">My Dashboard</p>
+        <p className="text-2xl text-center font-semibold dark:text-green-100 my-10 underline underline-offset-8">My Dashboard</p>
       </section>
 
       <section>

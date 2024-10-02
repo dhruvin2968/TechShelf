@@ -16,9 +16,9 @@ export const Search = ({setSearchSection}) => {
         <form onSubmit={handleSearch} className="flex items-center">   
             <div className="relative w-full">
                 <span className="bi bi-search flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"></span>
-                <input ref={searchRef} name="search" type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" autoComplete="off" required="" />
+                <input ref={searchRef} name="search" type="text" id="simple-search" className="bg-green-50 border border-green-300 text-green-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full pl-10 p-2.5  dark:bg-green-950 dark:border-green-200 dark:placeholder-green-400 dark:text-white dark:focus:ring-green-600 dark:focus:border-green-600" placeholder="Search" autoComplete="off" required="" />
             </div>
-            <button type="submit" className="bi bi-search py-2.5 px-3 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <button type="submit" className="bi bi-search py-2.5 px-3 ml-2 text-sm font-medium text-black dark:text-white bg-green-300 rounded-lg border border-green-950 hover:bg-green-400 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-900 dark:hover:bg-green-950 dark:focus:ring-green-300">
             </button>
         </form>
     </div>
