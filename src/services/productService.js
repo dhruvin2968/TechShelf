@@ -1,5 +1,5 @@
 export async function getProductList(searchTerm){
-    const response = await fetch('${process.env.REACT_APP_HOST}/444/products');
+    const response = await fetch(`${process.env.REACT_APP_HOST}/444/products`);
    const data = await response.json();
     const filteredProducts = data.filter(product => 
       product.name.toLowerCase().includes(`${searchTerm?searchTerm:''}`)
