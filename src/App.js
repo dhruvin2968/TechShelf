@@ -5,7 +5,7 @@ import {Header,Footer} from "./components"
 
 function App() {
   return (
-    <div className="App dark:bg-violet-800">
+    <div className="App dark:bg-violet-950">
       <Header/>
      <AllRoutes/>
      <Footer/>  
