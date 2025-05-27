@@ -50,7 +50,7 @@ export const Login = () => {
         <form onSubmit={handleLogin}>
           <div className="mb-6">
               <label htmlFor="email" className="block mb-2 text-sm font-medium text-violet-900 dark:text-violet-300">Your email</label>
-              <input ref={email} type="email" id="email" className="bg-violet-50 border border-violet-300 text-violet-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-violet-950 dark:border-violet-200 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500" placeholder="ayush@example.com" required autoComplete="off" />
+              <input ref={email} type="email" id="email" className="bg-violet-50 border border-violet-300 text-violet-900 text-sm rounded-lg focus:ring-violet-500 focus:border-violet-500 block w-full p-2.5 dark:bg-violet-950 dark:border-violet-200 dark:placeholder-violet-400 dark:text-white dark:focus:ring-violet-500 dark:focus:border-violet-500" placeholder="dhruvin@example.com" required autoComplete="off" />
           </div>
           <div className="mb-6">
               <label htmlFor="password" className="block mb-2 text-sm font-medium text-violet-900 dark:text-violet-300">Your password</label>
